@@ -1,12 +1,32 @@
 import {useState} from "react";
-function ExpenseForm() {
+function ExpenseForm({ addExpense }){
     const [title, setTitle] = useState("");
     const [amount, setAmount] = useState("");
     const [category, setCatogery] = useState("");
     const [date, setDate] = useState("");
     const [description, setDescription]= useState("");
+    const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newExpense = {
+        id: Date.now(),
+        title,
+        amount,
+        category,
+        date,
+        description,
+    };
+
+    addExpense(newExpense);
+
+    setTitle("");
+    setAmount("");
+    setCategory("");
+    setDate("");
+    setDescription("");
+};
     return (
-        <form action="/action">
+        <form action="/action" onSubmit={handleSubmit}>
         <div>
             <h2>Add New Expense</h2>
 
@@ -15,8 +35,6 @@ function ExpenseForm() {
             <input type="number" id="amount" placeholder="Enter The Amount"
              value={title}
              onChange={(e) => setTitle(e.target.value)} />
-            <p>Amount Entered: {amount}</p>
-        
 
             <br /><br />
 
@@ -51,7 +69,6 @@ function ExpenseForm() {
             <textarea id="Description" placeholder="Enter Description (optional)" 
             value={description} 
             onChange ={(e)=>setdescription(e.target.value)}></textarea>
-            <p> Entered Description = {description}</p>
 
             <br /><br />
 

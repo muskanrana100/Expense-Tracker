@@ -5,12 +5,12 @@ import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import {useState} from "react";
 function App() {
-  const[expenses, setExpenses] = useState([]);
+  const addExpenses = newExpenses =>{setExpenses([...expenses,newExpenses])} ;
   return (
     <div>
       <Header />
       <ExpenseList expenses={expenses} />
-      <ExpenseForm />
+      <ExpenseForm expenses={expenses} />
       <Footer />
     </div>
   );
