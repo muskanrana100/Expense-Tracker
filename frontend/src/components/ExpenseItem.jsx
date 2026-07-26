@@ -1,3 +1,4 @@
+import ExpenseItem from "./ExpenseItem";
 function ExpenseItem({ expense }) {
     return (
         <div className="expense-item">
