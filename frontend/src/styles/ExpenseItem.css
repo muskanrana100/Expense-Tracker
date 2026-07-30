@@ -1,0 +1,70 @@
+.expense-item {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.expense-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.expense-item h3 {
+    color: #2563eb;
+    margin-bottom: 15px;
+}
+
+.expense-item p {
+    margin: 8px 0;
+    color: #444;
+    line-height: 1.5;
+}
+
+.expense-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.expense-actions button {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease,
+                transform 0.2s ease;
+}
+
+.expense-actions button:hover {
+    transform: scale(1.03);
+}
+
+.edit-btn {
+    background-color: #2563eb;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+}
+
+@media (max-width: 768px) {
+    .expense-actions {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,25 @@
+.expense-list {
+    margin: 30px 0;
+}
+
+.no-expenses {
+    text-align: center;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    color: #666;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+    .expense-list {
+        margin: 20px 0;
+    }
+
+    .no-expenses {
+        font-size: 16px;
+        padding: 20px;
+    }
+}

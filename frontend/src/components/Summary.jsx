@@ -1,3 +1,5 @@
+import "../styles/Summary.css";
+
 function Summary({ expenses }) {
   const totalAmount = expenses.reduce(
     (total, expense) => total + expense.amount,
@@ -19,25 +21,29 @@ function Summary({ expenses }) {
     <div className="summary">
       <h2>Expense Summary</h2>
 
-      <p>
-        <strong>Total Expenses:</strong>{" "}
-        ₹{totalAmount.toLocaleString("en-IN")}
-      </p>
+      <div className="summary-grid">
 
-      <p>
-        <strong>Total Transactions:</strong>{" "}
-        {totalTransactions}
-      </p>
+        <div className="summary-card">
+          <h3>💰 Total Expenses</h3>
+          <p>₹{totalAmount.toLocaleString("en-IN")}</p>
+        </div>
 
-      <p>
-        <strong>Categories Used:</strong>{" "}
-        {totalCategories}
-      </p>
+        <div className="summary-card">
+          <h3>📄 Transactions</h3>
+          <p>{totalTransactions}</p>
+        </div>
 
-      <p>
-        <strong>Latest Expense:</strong>{" "}
-        {latestExpense}
-      </p>
+        <div className="summary-card">
+          <h3>📂 Categories</h3>
+          <p>{totalCategories}</p>
+        </div>
+
+        <div className="summary-card">
+          <h3>🕒 Latest Expense</h3>
+          <p>{latestExpense}</p>
+        </div>
+
+      </div>
     </div>
   );
 }

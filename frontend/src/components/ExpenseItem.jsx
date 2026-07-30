@@ -1,3 +1,5 @@
+import "../styles/ExpenseItem.css";
+
 function ExpenseItem({
   expense,
   deleteExpense,
@@ -8,36 +10,54 @@ function ExpenseItem({
       <h3>{expense.title}</h3>
 
       <p>
-        <strong>Amount:</strong> ₹{expense.amount}
+        <strong>💰 Amount:</strong> ₹
+        {expense.amount.toLocaleString("en-IN")}
       </p>
 
       <p>
-        <strong>Category:</strong> {expense.category}
+        <strong>📂 Category:</strong>{" "}
+        {expense.category}
       </p>
 
       <p>
-        <strong>Date:</strong> {expense.date}
+        <strong>📅 Date:</strong>{" "}
+        {new Date(expense.date).toLocaleDateString(
+          "en-IN",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          }
+        )}
       </p>
 
       <p>
-        <strong>Payment:</strong> {expense.payment}
+        <strong>💳 Payment:</strong>{" "}
+        {expense.payment}
       </p>
 
       {expense.description && (
         <p>
-          <strong>Description:</strong> {expense.description}
+          <strong>📝 Description:</strong>{" "}
+          {expense.description}
         </p>
       )}
 
       <div className="expense-actions">
         <button
+          className="edit-btn"
+          type="button"
           onClick={() => editExpense(expense)}
         >
           Edit
         </button>
 
         <button
-          onClick={() => deleteExpense(expense.id)}
+          className="delete-btn"
+          type="button"
+          onClick={() =>
+            deleteExpense(expense.id)
+          }
         >
           Delete
         </button>
