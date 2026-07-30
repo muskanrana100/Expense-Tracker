@@ -1,88 +1,181 @@
-import { useState } from "react";
-function ExpenseForm({ addExpense }) {
-    const [title, setTitle] = useState("");
-    const [amount, setAmount] = useState("");
-    const [category, setCatogery] = useState("");
-    const [date, setDate] = useState("");
-    const [payment, setPayment] = useState("");
-    const [description, setDescription] = useState("");
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const newExpense = {
-            id: Date.now(),
-            title,
-            amount: Number(amount),
-            category,
-            date,
-            description,
-        };
+import { useState, useEffect } from "react";
 
-        addExpense(newExpense);
-        setTitle("");
-        setAmount("");
-        setCategory("");
-        setDate("");
-        setDescription("");
+function ExpenseForm({
+  addExpense,
+  updateExpense,
+  editingExpense,
+}) {
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [category, setCategory] = useState("");
+  const [date, setDate] = useState("");
+  const [payment, setPayment] = useState("");
+  const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    if (editingExpense) {
+      setTitle(editingExpense.title);
+      setAmount(editingExpense.amount);
+      setCategory(editingExpense.category);
+      setDate(editingExpense.date);
+      setPayment(editingExpense.payment);
+      setDescription(editingExpense.description);
+    }
+  }, [editingExpense]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newExpense = {
+      id: editingExpense ? editingExpense.id : Date.now(),
+      title,
+      amount: Number(amount),
+      category,
+      date,
+      payment,
+      description,
     };
-    return (
-        <form action="/action" onSubmit={handleSubmit}>
-            <div>
-                <h2>Add New Expense</h2>
-                <label htmlFor="amount">Amount</label>
-                <br />
-                <input type="number" id="amount" placeholder="Enter The Amount"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)} />
-                <br /><br />
-                <label>Category</label>
-                <br />
-                <select name="category" id="category"
-                    value={category}
-                    onChange={(e) => setCatogery(e.target.value)}>
-                    <option value="Travel">Travel</option>
-                    <option value="Food">Food</option>
-                    <option value="Shopping">Shopping</option>
-                    <option value="Bills">Bills</option>
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Savings">Savings</option>
-                    <option value="Personal">Persnol Expenses</option>
-                    <option value="Others">Others</option>
-                </select>
-                <br /><br />
-                <label id="Date">Date</label>
-                <br />
-                <input type="date" id="Date" placeholder="Date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)} />
-                <br /><br />
-                <label htmlFor="Description">Enter Description</label>
-                <br />
-                <textarea id="Description" placeholder="Enter Description (optional)"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}></textarea>
-                <br /><br />
-                <label htmlFor="Payment">Payment Method</label>
-                <br />
-                <select name="Payment" id="Payment"
-                    value={payment}
-                    onChange={(e) => setPayment(e.target.value)}>
-                    <option value="Cash">Cash</option>
-                    <option value="UPI">UPI</option>
-                    <option value="Credit Card">Credit Card</option>
-                    <option value="Debit Card">Debit Card</option>
-                </select>
-                <br /><br />
 
-                <button type="submit">
-                    Add Expense
-                </button>
+    if (editingExpense) {
+      updateExpense(newExpense);
+    } else {
+      addExpense(newExpense);
+    }
 
-                <button type="submit">
-                    Reset
-                </button>
+    setTitle("");
+    setAmount("");
+    setCategory("");
+    setDate("");
+    setPayment("");
+    setDescription("");
+  };
 
-            </div>
-        </form>
-    );
+  const handleReset = () => {
+    setTitle("");
+    setAmount("");
+    setCategory("");
+    setDate("");
+    setPayment("");
+    setDescription("");
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2>
+        {editingExpense ? "Update Expense" : "Add New Expense"}
+      </h2>
+
+      <div>
+        <label htmlFor="title">Title</label>
+        <br />
+        <input
+          type="text"
+          id="title"
+          placeholder="Enter Expense Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
+
+      <br />
+
+      <div>
+        <label htmlFor="amount">Amount</label>
+        <br />
+        <input
+          type="number"
+          id="amount"
+          placeholder="Enter Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          required
+        />
+      </div>
+
+      <br />
+
+      <div>
+        <label htmlFor="category">Category</label>
+        <br />
+        <select
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+        >
+          <option value="">Select Category</option>
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Bills">Bills</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Savings">Savings</option>
+          <option value="Personal">Personal</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+
+      <br />
+
+      <div>
+        <label htmlFor="date">Date</label>
+        <br />
+        <input
+          type="date"
+          id="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          required
+        />
+      </div>
+
+      <br />
+
+      <div>
+        <label htmlFor="payment">Payment Method</label>
+        <br />
+        <select
+          id="payment"
+          value={payment}
+          onChange={(e) => setPayment(e.target.value)}
+          required
+        >
+          <option value="">Select Payment Method</option>
+          <option value="Cash">Cash</option>
+          <option value="UPI">UPI</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="Debit Card">Debit Card</option>
+        </select>
+      </div>
+
+      <br />
+
+      <div>
+        <label htmlFor="description">Description</label>
+        <br />
+        <textarea
+          id="description"
+          placeholder="Enter Description (Optional)"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+
+      <br />
+
+      <button type="submit">
+        {editingExpense ? "Update Expense" : "Add Expense"}
+      </button>
+
+      <button
+        type="button"
+        onClick={handleReset}
+      >
+        Reset
+      </button>
+    </form>
+  );
 }
+
 export default ExpenseForm;
