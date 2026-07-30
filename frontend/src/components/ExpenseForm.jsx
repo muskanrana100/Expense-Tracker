@@ -85,6 +85,7 @@ function ExpenseForm({
         <br />
         <input
           type="number"
+          min = "1"
           id="amount"
           placeholder="Enter Amount"
           value={amount}

@@ -20,7 +20,8 @@ function Summary({ expenses }) {
       <h2>Expense Summary</h2>
 
       <p>
-        <strong>Total Expenses:</strong> ₹{totalAmount}
+        <strong>Total Expenses:</strong>{" "}
+        ₹{totalAmount.toLocaleString("en-IN")}
       </p>
 
       <p>

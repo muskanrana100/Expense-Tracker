@@ -1,6 +1,9 @@
 function Footer() {
-    return (
-        <h5> Made By Muskan Rana</h5>
-    );
+  return (
+    <footer className="footer">
+      <p>Made with ❤️ by Muskan Rana</p>
+    </footer>
+  );
 }
+
 export default Footer;
